@@ -24,6 +24,7 @@ class RecyclerViewAdaptor: ListAdapter<BaseDisplayModel, BaseViewHolder>(Recycle
         parent: ViewGroup
     ): BaseViewHolder {
         return when (viewType){
+            DisplayType.UNSPECIFIED -> DisplayTypeUnspecifiedViewHolder.getInstance(parent)
         }
     }
 }
