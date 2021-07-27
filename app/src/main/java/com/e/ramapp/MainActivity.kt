@@ -10,34 +10,39 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.fragment.app.activityViewModels
+import com.e.ramapp.helpers.recyclerview.RecyclerViewAdaptor
+import com.e.ramapp.viewholders.DisplayTypeUnspecifiedModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MyViewModel : ViewModel() {
-    fun getData(callback: (String)-> Unit) {
+    fun getData(callback: (AllCharactersDto)-> Unit) {
         viewModelScope.launch {
             kotlin.runCatching {
                 RaMRepo().getAllCharacters()
             }.onSuccess {
-                callback(it.toString())
+                callback(it)
             }.onFailure {
-                callback(it.toString())
             }
         }
     }
 }
-
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val adaptor = RecyclerViewAdaptor()
+        recycler.adapter = adaptor
+
         val viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
         viewModel.getData {
-            txtView.text = it.toString()
+            adaptor.submitList(it.results.map {data->
+                DisplayTypeUnspecifiedModel(
+                    data
+                )
+            })
         }
-
     }
 
 }
