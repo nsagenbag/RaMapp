@@ -2,70 +2,70 @@ package com.e.ramapp.data.dto
 
 import com.google.gson.annotations.SerializedName
 
-/*
-{
-  "info": {
-    "count": 671,
-    "pages": 34,
-    "next": "https://rickandmortyapi.com/api/character/?page=2",
-    "prev": null
-  },
-  "results": [
-    {
-      "id": 1,
-      "name": "Rick Sanchez",
-      "status": "Alive",
-      "species": "Human",
-      "type": "",
-      "gender": "Male",
-      "origin": {
-        "name": "Earth",
-        "url": "https://rickandmortyapi.com/api/location/1"
-      },
-      "location": {
-        "name": "Earth",
-        "url": "https://rickandmortyapi.com/api/location/20"
-      },
-      "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-      "episode": [
-        "https://rickandmortyapi.com/api/episode/1",
-        "https://rickandmortyapi.com/api/episode/2",
-        // ...
-      ],
-      "url": "https://rickandmortyapi.com/api/character/1",
-      "created": "2017-11-04T18:48:46.250Z"
-    },
-    // ...
-  ]
-}
- */
-
 data class AllCharactersDto(
-    @SerializedName( "info")
+    @SerializedName("info")
     val info: Info,
 
-    @SerializedName( "results")
+    @SerializedName("results")
     val results: List<PayloadResults>
-)
-{
+) {
     data class Info(
-        @SerializedName( "count")
+        @SerializedName("count")
         val count: Long?,
 
-        @SerializedName( "pages")
+        @SerializedName("pages")
         val pages: Long?,
 
-        @SerializedName( "next")
+        @SerializedName("next")
         val next: String?,
 
-        @SerializedName( "prev")
+        @SerializedName("prev")
         val prev: Any?
     )
+
     data class PayloadResults(
-        @SerializedName( "id")
+        @SerializedName("id")
         val id: Long?,
 
-        @SerializedName( "name")
-        val name: String?
+        @SerializedName("name")
+        val name: String?,
+
+        @SerializedName("status")
+        val status: String?,
+
+        @SerializedName("species")
+        val species: String?,
+
+        @SerializedName("type")
+        val type: String?,
+
+        @SerializedName("gender")
+        val gender: String?,
+
+        @SerializedName("origin")
+        val origin: Location?,
+
+        @SerializedName("location")
+        val location: Location?,
+
+        @SerializedName("image")
+        val imageUrl: String?,
+
+        @SerializedName("episode")
+        val episodes: List<String>?,
+
+        @SerializedName("url")
+        val url: String?,
+
+        @SerializedName("created")
+        val created: String?,
+    )
+
+    data class Location(
+        @SerializedName("name")
+        val name: String?,
+
+        @SerializedName("url")
+        val url: String?
     )
 }
